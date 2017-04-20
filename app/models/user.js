@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 
 var UserSchema = new Schema({
   username: { 
@@ -16,7 +16,7 @@ var UserSchema = new Schema({
   }
 });
 
-UserSchema.pre('save', function (next) {
+UserSchema.pre('save', function(next) {
   var user = this;
 
   // only hash the password if its new or updated
@@ -24,7 +24,7 @@ UserSchema.pre('save', function (next) {
     return next();
   }
     // hash the pw pleb
-  bcrypt.hash(user.password, salt, function (err, hash) {
+  bcrypt.hash(user.password, null, null, function(err, hash) {
     if (err) {
       return next(err);
     } else {
@@ -34,8 +34,8 @@ UserSchema.pre('save', function (next) {
   });
 });
 
-UserSchema.methods.comparePassword = function (candidatePassword, cb) {
-  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+UserSchema.methods.comparePassword = function(candidatePassword, cb) {
+  bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
     if (err) {
       return cb(err);
     } else {
