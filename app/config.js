@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var path = require('path');
 var ip = process.env.IP || 'localhost';
-var port = process.env.PORT || 4568;
+var port = process.env.PORT || 27017;
 var dburl = 'mongodb://' + ip + ':' + port + '/shortly_deploy';
 
 mongoose.connect(dburl);
