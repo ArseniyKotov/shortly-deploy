@@ -2,7 +2,7 @@ var app = require('./server-config.js');
 
 var port = process.env.PORT || 4568;
 
-var ip = 162.243.44.239;
+var ip = process.env.IP;
 
 
 app.listen(port, ip);
