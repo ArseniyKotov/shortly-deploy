@@ -1,7 +1,13 @@
 var app = require('./server-config.js');
 
-var port = 4568;
+var port = process.env.PORT || 4568;
 
-app.listen(port);
+var ip = process.env.IP || 'localhost';
+
+
+app.listen(port, ip);
 
 console.log('Server now listening on port ' + port);
+console.log('Server using ip ' + ip);
+
+//
